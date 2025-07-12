@@ -5,6 +5,8 @@ import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Input } from './components/ui/input';
 import { Progress } from './components/ui/progress';
+import ThreatMap from './components/ThreatMap';
+import ThreatFeed from './components/ThreatFeed';
 
 type MenuItem = {
   id: string;
@@ -74,7 +76,7 @@ function App() {
             {/* Enhanced stats cards with animations */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {statsCards.map((stat, index) => (
-                <Card key={index} className="dark-glass border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 group hover:ambient-glow hover:scale-105">
+                <Card key={index} className="dark-glass border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 group hover:ambient-glow hover:scale-105 data-stream">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium text-gray-300">{stat.title}</CardTitle>
                     <stat.icon className="h-4 w-4 text-blue-400 group-hover:text-blue-300 transition-colors animate-pulse" />
@@ -103,7 +105,7 @@ function App() {
                     { name: 'TI-SERVER-03', ip: '192.168.1.102', status: 'warning', cpu: 89, memory: 92 },
                     { name: 'TI-SERVER-04', ip: '192.168.1.103', status: 'offline', cpu: 0, memory: 0 },
                   ].map((server, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 rounded-lg glass-effect border border-gray-700/30 hover:border-blue-500/30 transition-all group">
+                    <div key={index} className="flex items-center justify-between p-4 rounded-lg glass-effect border border-gray-700/30 hover:border-blue-500/30 transition-all group threat-pulse">
                       <div className="flex items-center space-x-4">
                         <div className={`w-3 h-3 rounded-full animate-pulse ${
                           server.status === 'online' ? 'bg-green-400 shadow-lg shadow-green-400/50' : 
@@ -111,7 +113,7 @@ function App() {
                           'bg-red-400 shadow-lg shadow-red-400/50'
                         }`} />
                         <div>
-                          <p className="font-medium text-white">{server.name}</p>
+                          <p className="font-medium text-white group-hover:text-blue-300 transition-colors">{server.name}</p>
                           <p className="text-sm text-gray-400">{server.ip}</p>
                         </div>
                       </div>
@@ -137,6 +139,9 @@ function App() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Enhanced Threat Map */}
+            <ThreatMap />
           </div>
         );
       case 'configs':
@@ -248,6 +253,9 @@ function App() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Enhanced Threat Feed */}
+            <ThreatFeed />
           </div>
         );
       case 'users':
@@ -307,7 +315,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900">
       <div className="flex">
         {/* Enhanced Sidebar */}
-        <div className="w-64 min-h-screen dark-glass border-r border-gray-700/50 cyber-border">
+        <div className="w-64 min-h-screen dark-glass border-r border-gray-700/50 cyber-border matrix-bg">
           <div className="p-6">
             <div className="flex items-center space-x-3 mb-8">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center animate-pulse">
